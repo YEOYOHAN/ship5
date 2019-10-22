@@ -272,7 +272,7 @@ auth_vue ={
 		'</head>'
 	},
 	login_body: x=>{
-		return'<body>'+
+		return'<body class="text-center">'+
 		'  <form id="form_join" class="form-signin">'+
 		'    <div class="form-Checkout">'+
 		'    <img class="mb-4" src="'+x.img+'/bootstrap-solid.svg" alt="" width="72" height="72">'+
