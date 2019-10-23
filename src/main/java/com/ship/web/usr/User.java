@@ -15,3 +15,5 @@ public class User{
     upoint, score, mvp, win, hitmap, km, heart, author, lolName;
 	
 }
+
+
