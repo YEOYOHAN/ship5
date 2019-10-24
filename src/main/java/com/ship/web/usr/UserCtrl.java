@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.ship.web.cmm.IConsumer;
 import com.ship.web.cmm.IFunction;
+import com.ship.web.cmm.IPredicate;
 import com.ship.web.utl.Printer;
 import lombok.extern.log4j.Log4j;
 
@@ -27,12 +28,15 @@ public class UserCtrl {
     @Autowired Printer printer;
     @Autowired UserMapper userMapper;
     
-    
+
     @PostMapping("/")
-    public String join(@RequestBody User param) {
+    public Map<?,?> join(@RequestBody User param) {
         IConsumer<User> t = T -> userMapper.insertUser(param);
+        printer.accept("조인 들어옴");
         t.accept(param);
-        return "SUCCESS";
+        map.clear();
+        map.put("msg", "SUCCESS");
+        return map;
     }
     @PostMapping("/{uid}")
     public User login(@PathVariable String uid, @RequestBody User param) {
@@ -56,5 +60,12 @@ public class UserCtrl {
     	IConsumer<User> t = T -> userMapper.insertUser(param);
     	t.accept(param);
 		return "SUCCESS";
+    }
+    @GetMapping("/{uid}/exist")
+    public Map<?,?> existId(@PathVariable String uid){
+    	IFunction<String,Integer> p = o -> userMapper.existId(uid);
+    	map.clear();
+    	map.put("msg", (p.apply(uid)==0) ? "SUCCESS" : "FAIL");
+    	return map;
     }
 }

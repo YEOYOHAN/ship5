@@ -91,27 +91,26 @@ auth_vue ={
         '      <form class="needs-validation" novalidate="">'+
         '        <div class="row">'+
         '          <div class="col-md-6 mb-3">'+
-        '            <label for="userid">USERID</label>'+
-        '            <input type="text" class="form-control" id="userid" placeholder="" value="" required="">'+
-        '            <div class="invalid-feedback">'+
-        '              Valid first name is required.'+
+        '            <label for="uid">USERID</label>'+
+        '            <input type="text" class="form-control" id="uid" placeholder="" value="" required="">'+
+        '            <div class="check_font" id="id_check">'+
         '            </div>'+
         '          </div>'+
         '          <div class="col-md-6 mb-3">'+
-        '            <label for="password">PASSWORD</label>'+
-        '            <input type="text" class="form-control" id="password" placeholder="" value="" required="">'+
+        '            <label for="upw">PASSWORD</label>'+
+        '            <input type="text" class="form-control" id="upw" placeholder="" value="" required="">'+
         '            <div class="invalid-feedback">'+
         '              Valid last name is required.'+
         '            </div>'+
         '          </div>'+
         '        </div>'+
         '        <div class="mb-3">'+
-        '          <label for="username">Username</label>'+
+        '          <label for="uname">Username</label>'+
         '          <div class="input-group">'+
         '            <div class="input-group-prepend">'+
         '              <span class="input-group-text">@</span>'+
         '            </div>'+
-        '            <input type="text" class="form-control" id="username" placeholder="Username" required="">'+
+        '            <input type="text" class="form-control" id="uname" placeholder="uname" required="">'+
         '            <div class="invalid-feedback" style="width: 100%;">'+
         '              Your username is required.'+
         '            </div>'+
@@ -278,9 +277,9 @@ auth_vue ={
 		'    <img class="mb-4" src="'+x.img+'/bootstrap-solid.svg" alt="" width="72" height="72">'+
 		'	 <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>'+
 		'    <label for="userid" class="sr-only">userid</label>'+
-		'    <input type="text" id="userid" class="form-control" placeholder="Email address" required="" autofocus="">'+
+		'    <input type="text" id="uid" class="form-control" placeholder="Email address" required="" autofocus="">'+
 		'    <label for="password" class="sr-only">Password</label>'+
-		'    <input type="password" id="password" class="form-control" placeholder="Password" required="">'+
+		'    <input type="password" id="upw" class="form-control" placeholder="Password" required="">'+
 		'    <div class="checkbox mb-3">'+
 		'      <label>'+
 		'        <a id="a_go_join" href="#">GO JOIN</a>'+
