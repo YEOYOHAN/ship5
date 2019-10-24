@@ -1,4 +1,4 @@
-package com.ship.web.config;
+package com.ship.web.ctx;
 
 import java.util.List;
 import org.springframework.context.annotation.ComponentScan;
@@ -25,7 +25,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @EnableWebMvc
 @ComponentScan(basePackages= {"com.ship.web"})
-public class ServletConfig implements WebMvcConfigurer{
+public class ServletContext implements WebMvcConfigurer{
 
 	@Override
 	public void configureViewResolvers(ViewResolverRegistry registry) {

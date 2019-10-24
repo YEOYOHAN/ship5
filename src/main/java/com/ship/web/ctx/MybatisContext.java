@@ -1,4 +1,4 @@
-package com.ship.web.config;
+package com.ship.web.ctx;
 
 import javax.sql.DataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @MapperScan(basePackages= {"com.ship.web"})
-public class MybatisConfig {
+public class MybatisContext {
 	@Autowired
 	ApplicationContext applicationContext;
 	
