@@ -108,7 +108,6 @@ auth = (()=>{
                     		})
                     	)
                     	.done(()=>{
-                    		alert('>>'+$.uname()),
                     		brd.onCreate()                    		
                     	}
                     	)
