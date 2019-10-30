@@ -1,10 +1,31 @@
 <!DOCTYPE mapper
-   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.ship.web.brd.ArticleMapper">
-   <insert id="insertArticle" parameterType="Article" >
-       INSERT INTO Article (USER_ID, BOARD_TYPE, TITLE, CONTENT) VALUES (
-           #{uid}, #{boardType}, #{title}, #{content}
-       )
-   </insert>
+    
+    <insert id="insertArticle" parameterType="Article" >
+        INSERT INTO ARTICLE (USER_ID, BOARD_TYPE, TITLE, CONTENT) VALUES (
+             #{uid}, #{boardtype}, #{title}, #{content}
+        )
+    </insert>
+    
+    <select id="countArticle" resultType="string">
+    		SELECT COUNT(ARTSEQ) FROM ARTICLE 
+    </select>
+    
+    <select id="selectList" resultType="Article">
+    		SELECT BOARD_TYPE AS boardtype, USER_ID AS uid, A.*
+    		FROM ARTICLE A
+    </select>
+  	<delete id ="deleteArticle" parameterType="Article">
+  			DELETE 
+			FROM ARTICLE 
+			WHERE ARTSEQ = #{artseq}
+  	</delete>
+  	<update id="updateArticle" parameterType="Article">
+  			UPDATE ARTICLE 
+			SET CONTENT = #{content}
+			WHERE ARTSEQ = #{artseq};
+  	</update>
 </mapper>

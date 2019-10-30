@@ -5,10 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
+@Data 
 @Component
 @AllArgsConstructor
 @NoArgsConstructor
 public class Article {
-	private String artseq, image, uid, comments, msg, rating, title, content, boardType;
+	private String artseq, image, uid, comments, msg, rating, boardtype, title, content; 
 }

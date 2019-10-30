@@ -2,19 +2,24 @@
 var auth = auth || {}
 auth = (()=>{
 	const WHEN_ERR = '호출하는 JS 파일을 찾지 못했습니다.'
-    let _, js, auth_vue_js, brd_js, router_js
-    let init = ()=>{
+    let _, js, auth_vue_js, brd_js, router_js, css, img, cookie_js
+    let init =()=>{
         _ = $.ctx()
         js = $.js()
+        css = $.css()
+        img = $.img()
         auth_vue_js = js+'/vue/auth_vue.js'
         brd_js = js+'/brd/brd.js'
         router_js = js+'/cmm/router.js'
+        cookie_js = js+'/cmm/cookie.js'
     }
     function onCreate(){
         init()
         $.when(
         	$.getScript(auth_vue_js),
-        	$.getScript(router_js)
+        	$.getScript(router_js),
+        	$.getScript(brd_js),
+        	$.getScript(cookie_js)
         )
         .done(()=>{
         	setContentView()
@@ -102,13 +107,11 @@ auth = (()=>{
                     contentType : 'application/json',
                     success : d =>{
                     	$.when(
-                    		$.getScript(brd_js),
-                    		$.getScript(router_js,()=>{
-                    			$.extend(new User(d))
-                    		})
+                    			setCookie("USER_ID", d.uid),
+                    			alert('저장된 쿠키:'+getCookie("USER_ID"))
                     	)
                     	.done(()=>{
-                    		brd.onCreate()                    		
+                    		brd.onCreate({_:_, js:js, css:css,img:img})                    		
                     	}
                     	)
                     	.fail(()=>{
