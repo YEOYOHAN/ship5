@@ -149,7 +149,7 @@ brd = (()=>{
                 contentType:'application/json'
             })
             alert('수정완료')
-             $('#recent_updates div.container-fluid').remove()
+            $('#recent_updates div.container-fluid').remove()
             recent_updates()
         })
     }

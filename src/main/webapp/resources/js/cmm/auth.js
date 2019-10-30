@@ -64,6 +64,7 @@ auth = (()=>{
         $('body').addClass('text-center')
         .html(auth_vue.login_body({css: $.css(), img: $.img()}))
     	 login()
+    	 access()
 
     }
     let join =()=>{
@@ -132,24 +133,36 @@ auth = (()=>{
         .addClass("btn btn-lg btn-primary btn-block")
         .appendTo('#btn_login')
     }
-    /**let existId =()=> {
-    	$.ajax({
-    		url : _+'/users/'+$('#uid').val() +'/exist',
-    		type : 'GET',
-    		contentType : 'application/json',
-    		success : d =>{
-    			if(d.msg==='SUCCESS'){
-    				alert('없는 아이디입니다.'+d.msg)
-    				return true;
-    			}else{
-    				alert('중복된 아이디입니다.')
-    				return false;
-    			}
-    		},
-    		error : e =>{
-                alert('existId ajxa실패')
-              }
-    	})
-    }*/
+    let access =()=>{
+        $('#a_go_admin').click(e=>{
+            e.preventDefault()
+            let ok = confirm('사원입니까')
+            if(ok){
+                let eid = prompt('아이디를 입력하세요')
+                let pwd = prompt('비밀번호를 입력하세요')
+                alert('입력한 사번:'+eid)
+                $.ajax({
+                    url : _+'/admins/'+eid,
+                    type : 'POST',
+                    data :JSON.stringify({eid : eid , pwd : pwd }) ,
+                    dateType : 'json',
+                    contentType : 'application/json',
+                    success : d=>{
+                        if(d.msg === 'SUCCESS'){
+                            alert('환영합니다')
+                            adm.onCreate()
+                        }else{
+                            alert('접근권한이 없습니다')
+                            app.run(_)
+                        }
+                    },
+                    error : ()=>{
+                    	alert('access ajxa실패')
+                    }
+                })
+            }
+        })
+        
+    }
     return {onCreate, join, login}
 })();
