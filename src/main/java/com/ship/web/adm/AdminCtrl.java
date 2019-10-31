@@ -35,7 +35,6 @@ public class AdminCtrl {
         IFunction<Admin, Admin> f = t -> adminMapper.selectAdminByIdPw(param);
         printer.accept("엑세스드렁옴");
         map.clear();
-        printer.accept("aaa"+param);
         map.put("msg", (f.apply(param)!=null)?"SUCCESS":"FAIL");
         return map;
     }

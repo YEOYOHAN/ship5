@@ -268,6 +268,7 @@ auth_vue ={
 		'    </style>'+
 		'    <!-- Custom styles for this template -->'+
 		'    <link href="'+x.css+'/signin.css" rel="stylesheet">'+
+		'    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">'+
 		'</head>'
 	},
 	login_body: x=>{
@@ -291,6 +292,7 @@ auth_vue ={
 		'    <div id ="btn_login"></div>'+
 		'    <p class="mt-5 mb-3 text-muted">© 2017-2019</p>'+
 		'  </form>'+
+		'	<img src="https://t1.daumcdn.net/cfile/tistory/22371C37556ECC330F">'+
 		'</body>'
 	}
 };

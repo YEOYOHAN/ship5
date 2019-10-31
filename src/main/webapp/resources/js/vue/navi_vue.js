@@ -8,7 +8,7 @@ navi_vue = {
 			'      </button>'+
 			'      <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">'+
 			'        <ul class="navbar-nav mr-auto">'+
-			'          <li id="menu_write"  class="nav-item active"></li>'+
+			'          <li id="menu_write"  class="nav-item"></li>'+
 			'          <li id="menu_logout" class="nav-item">'+
 			'          </li>'+
 			'          <li class="nav-item">'+

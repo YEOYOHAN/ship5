@@ -2,7 +2,7 @@
 var auth = auth || {}
 auth = (()=>{
 	const WHEN_ERR = '호출하는 JS 파일을 찾지 못했습니다.'
-    let _, js, auth_vue_js, brd_js, router_js, css, img, cookie_js
+    let _, js, auth_vue_js,adm_js, brd_js, router_js, css, img, cookie_js
     let init =()=>{
         _ = $.ctx()
         js = $.js()
@@ -12,6 +12,7 @@ auth = (()=>{
         brd_js = js+'/brd/brd.js'
         router_js = js+'/cmm/router.js'
         cookie_js = js+'/cmm/cookie.js'
+        adm_js = js+'/adm/adm.js'
     }
     function onCreate(){
         init()
@@ -19,7 +20,8 @@ auth = (()=>{
         	$.getScript(auth_vue_js),
         	$.getScript(router_js),
         	$.getScript(brd_js),
-        	$.getScript(cookie_js)
+        	$.getScript(cookie_js),
+        	$.getScript(adm_js)
         )
         .done(()=>{
         	setContentView()
@@ -162,7 +164,6 @@ auth = (()=>{
                 })
             }
         })
-        
     }
     return {onCreate, join, login}
 })();

@@ -1,16 +1,16 @@
 var navi = navi || {}
 navi = (()=>{
 	const WHEN_ERR = '호출하는 JS 파일을 찾지 못했습니다.'
-		let _, js, css, img, auth_vue_js, brd_js, navi_vue_js
-	let init =x=>{
-		_ = x._
-        js = x.js
-        css = x.css
-        img = x.img
+		let _, js, css, img, auth_vue_js, brd_js
+	let init =()=>{
+		_ = $.ctx()
+        js = $.js()
+        css = $.css()
+        img = $.img()
         brd_js = js+'/brd/brd.js'
 	}
-	let onCreate =x=> {
-		init(x)
+	let onCreate =()=> {
+		init()
 		setContentView()
 	}
 	let setContentView =()=> {
