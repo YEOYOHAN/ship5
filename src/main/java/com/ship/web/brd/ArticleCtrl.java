@@ -1,5 +1,6 @@
 package com.ship.web.brd;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import org.slf4j.Logger;
@@ -50,12 +51,15 @@ public class ArticleCtrl {
 		return map;
 	}
 	
-	@GetMapping("/")
-	public List<Article> list(){
+	@GetMapping("/page/{pageNo}")
+	public Map<?,?> list(@PathVariable String pageNo){
 		list.clear();
 		ISupplier<List<Article>> s = () -> articleMapper.selectList();
 		printer.accept("전체 글 목록\n"+s.get());
-		return s.get();
+		map.clear();
+		map.put("articles",s.get());
+		map.put("pages", Arrays.asList(1,2,3,4,5));
+		return map;
 	}
 	
 	@PutMapping("/{artseq}")
