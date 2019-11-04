@@ -31,8 +31,8 @@ public class Proxy {
 		try {
 			Connection.Response response = Jsoup.connect(url).method(Connection.Method.GET).execute();
 			Document document = response.parse();
-			//String text = document.html();
-			String text = document.text();
+			String text = document.html();
+			//String text = document.text();
 			p.accept("트롤링만 텍스트\n"+text);
 			proxylist.add(text);
 		} catch (Exception e2) {
