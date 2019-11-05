@@ -23,11 +23,11 @@
 			SET CONTENT = #{content}
 			WHERE ARTSEQ = #{artseq};
   	</update>
-  	<select id="selectList" resultType="Article">
+  	<select id="selectList" resultType="Article" parameterType="Proxy">
   		SELECT A.BOARD_TYPE AS boardtype, A.*
   			FROM (SELECT *
 				FROM ARTICLE
 				ORDER BY ARTSEQ DESC) A
-		LIMIT 0, 5
+		LIMIT ${startRow}, ${pageSize}
   	</select>
 </mapper>
