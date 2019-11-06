@@ -24,7 +24,7 @@
 			WHERE ARTSEQ = #{artseq};
   	</update>
   	<select id="selectList" resultType="Article" parameterType="Proxy">
-  		SELECT A.BOARD_TYPE AS boardtype, A.*
+  		SELECT A.BOARD_TYPE AS boardtype, A.USER_ID AS uid, A.*
   			FROM (SELECT *
 				FROM ARTICLE
 				ORDER BY ARTSEQ DESC) A

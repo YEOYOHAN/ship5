@@ -3,6 +3,7 @@ package com.ship.web.pxy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import org.jsoup.Connection;
@@ -21,47 +22,57 @@ import lombok.Data;
 @Data
 @Lazy
 public class Proxy {
-    private int pageNum, pageSize, startRow, endRow;
-    private String search;
-    private final int BLOCK_SIZE = 5;
-    @Autowired Printer printer;
-    @Autowired ArticleMapper articleMapper;
-    @SuppressWarnings("unused")
-    
+	private int pageNum, pageSize, startRow, endRow;
+	private boolean existPrev, existNext;
+	private String search;
+	private final int BLOCK_SIZE = 5;
+	@Autowired Printer p;
+	@Autowired ArticleMapper articleMapper;
+	
+	@SuppressWarnings("unused")
 	public void paging() {
-        ISupplier<String> s = ()-> articleMapper.countArticle();
-        int totalCount = Integer.parseInt(s.get());
-        int pageCount = (totalCount%pageSize ==0) ?totalCount/pageSize : (totalCount/pageSize)+1;
-        startRow = (pageNum -1) * pageSize;
-        endRow = (pageNum == pageCount)?totalCount-1:startRow+pageSize-1;
-        int blockCount = (pageCount%BLOCK_SIZE==0)?pageCount/BLOCK_SIZE:(pageCount/BLOCK_SIZE)+1;
-        int blockNum = (pageNum-1) / BLOCK_SIZE;
-        int startPage = BLOCK_SIZE-4;
-        int endPage = (blockNum+1)*BLOCK_SIZE;
-        boolean existPrev = false;
-        boolean existNext = false;
-    }
-    public int parseInt(String param) {
-    	Function<String, Integer> f = s -> Integer.parseInt(s);
+		ISupplier<String> s = ()-> articleMapper.countArticle();
+		int totalCount = Integer.parseInt(s.get());
+		System.out.println("프록시 안에서 찍은 전체글 갯수: "+totalCount);
+		int pageCount = (totalCount % pageSize != 0) ? (totalCount / pageSize)+1 : totalCount / pageSize;
+		startRow = (pageNum-1)*pageSize;
+		endRow = (pageNum==pageCount) ? totalCount -1 : startRow + pageSize -1;
+		int blockCount = (pageCount % BLOCK_SIZE != 0) ? (pageCount / BLOCK_SIZE)+1 : pageCount / BLOCK_SIZE;
+		int blockNum = (pageNum - 1) / BLOCK_SIZE;
+		int startPage = blockNum * BLOCK_SIZE + 1;
+		int endPage = ((blockNum + 1) != blockCount) ? startPage + (BLOCK_SIZE -1) : pageCount;
+		existPrev = blockNum != 0;
+		existNext = (blockNum + 1) != blockCount;
+	}
+	public int integer(String param) {
+		Function<String, Integer> f = s -> Integer.parseInt(s);
 		return f.apply(param);
 	}
-    public List<?> crawl(Map<?,?> paramMap){
-        
-        String url = "http://"+paramMap.get("site")+"/";
-        printer.accept("넘어온 url\n"+url);
-        List<String> proxylist = new ArrayList<>();
-        proxylist.clear();
-        try {
-        Connection.Response response = Jsoup.connect(url).method(Connection.Method.GET).execute();
-        
-        Document document = response.parse();
-        String text = document.html();
-        //String text = document.text();
-        printer.accept("크롤링한텍스트\n"+text);
-        proxylist.add(text);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return proxylist;
-    }
+	public List<?> crawl(Map<?,?> paramMap){
+		String url = "http://"+paramMap.get("site")+"/";
+		p.accept("넘어온 URL \n"+url);
+		List<String> proxyList = new ArrayList<>();
+		proxyList.clear();
+		try {
+			Connection.Response response = Jsoup.connect(url)
+			                                    .method(Connection.Method.GET)
+			                                    .execute();
+			Document document = response.parse();
+			String text = document.html();
+			//String text = document.text();
+			p.accept("크롤링한 텍스트 \n"+text);
+			proxyList.add(text);
+			
+		} catch (Exception e2) {
+			e2.printStackTrace();
+		}
+		
+		return proxyList;
+	}
+	public int random(int a, int b) {
+		BiFunction<Integer, Integer, Integer> f =(t,u)->(int)(Math.random()*(u-t))+t;
+		return f.apply(a, b);
+		
+	}
+	
 }

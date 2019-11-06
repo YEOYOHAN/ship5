@@ -42,13 +42,17 @@ public class ArticleCtrl {
 	}
 	@GetMapping("/page/{pageNo}/size/{pageSize}")
 	public Map<?,?> list(@PathVariable String pageNo, @PathVariable String pageSize){
-		pxy.setPageNum(pxy.parseInt(pageNo));
-		pxy.setPageSize(pxy.parseInt(pageSize));
+		System.out.println("넘어온 페이지 넘버: "+pageNo);
+		pxy.setPageNum(pxy.integer(pageNo));
+		pxy.setPageSize(pxy.integer(pageSize));
 		pxy.paging();
 		list.clear();
-		ISupplier<List<Article>> s = () -> articleMapper.selectList(pxy);
-		printer.accept("전체 글 목록\n"+s.get());
-		map.accept(Arrays.asList("articles", "pages"), Arrays.asList(s.get(), Arrays.asList(1,2,3,4,5)));
+		ISupplier<List<Article>> s =()-> articleMapper.selectList(pxy);
+		printer.accept("해당 페이지 글목록 \n"+s.get());
+		int ran = pxy.random(3, 11);
+		System.out.println("랜덤 수 출력 : "+ ran);
+		map.accept(Arrays.asList("articles","pages", "pxy"),
+				Arrays.asList(s.get(),Arrays.asList(1,2,3,4,5),pxy));
 		return map.get();
 	}
 	@GetMapping("/count")
